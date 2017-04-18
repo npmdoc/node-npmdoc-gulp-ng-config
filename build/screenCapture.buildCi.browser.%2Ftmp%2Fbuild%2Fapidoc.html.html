@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/ajwhite/gulp-ng-config"
-
-    >gulp-ng-config (v1.4.0)</a>
+    <a href="https://github.com/ajwhite/gulp-ng-config">gulp-ng-config (v1.4.0)</a>
 </h1>
 <h4>AngularJS configuration generator for a module of constants</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-ng-config">module gulp-ng-config</a><ol>
 
@@ -88,17 +81,17 @@
     <li>description and source-code<pre class="apidocCodePre">function gulpNgConfig(moduleName, configuration) {
   var stream, defaults;
   defaults = {
-    type: &#x27;constant&#x27;,
+    type: 'constant',
     createModule: true,
     wrap: false,
     environment: null,
     parser: null,
     pretty: false,
-    templateFilePath:  __dirname + &#x27;/template.html&#x27;
+    templateFilePath:  __dirname + '/template.html'
   };
 
   if (!moduleName) {
-    throw new PluginError(PLUGIN_NAME, &#x27;Missing required moduleName option for gulp-ng-config&#x27;);
+    throw new PluginError(PLUGIN_NAME, 'Missing required moduleName option for gulp-ng-config');
   }
 
   configuration = configuration || {};
@@ -114,41 +107,41 @@
         environmentKeys;
 
     try {
-      templateFile = fs.readFileSync(configuration.templateFilePath || defaults.templateFilePath, &#x27;utf8&#x27;);
+      templateFile = fs.readFileSync(configuration.templateFilePath || defaults.templateFilePath, 'utf8');
     } catch (error) {
-      this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invalid templateFilePath option, file not found&#x27;));
+      this.emit('error', new PluginError(PLUGIN_NAME, 'invalid templateFilePath option, file not found'));
       return callback();
     }
 
-    if (!configuration.parser &#x26;&#x26; (_.endsWith(file.path, &#x27;yml&#x27;) || _.endsWith(file.path, &#x27;yaml&#x27;))) {
-      configuration.parser = &#x27;yml&#x27;;
+    if (!configuration.parser &amp;&amp; (_.endsWith(file.path, 'yml') || _.endsWith(file.path, 'yaml'))) {
+      configuration.parser = 'yml';
     }
 
     if (!configuration.parser) {
-      configuration.parser = &#x27;json&#x27;;
+      configuration.parser = 'json';
     }
 
-    if (configuration.parser === &#x27;json&#x27;) {
+    if (configuration.parser === 'json') {
       try {
-        jsonObj = file.isNull() ? {} : JSON.parse(file.contents.toString(&#x27;utf8&#x27;));
+        jsonObj = file.isNull() ? {} : JSON.parse(file.contents.toString('utf8'));
       } catch (e) {
-        this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invalid JSON file provided&#x27;));
+        this.emit('error', new PluginError(PLUGIN_NAME, 'invalid JSON file provided'));
         return callback();
       }
-    } else if (configuration.parser === &#x27;yml&#x27; || configuration.parser === &#x27;yaml&#x27;) {
+    } else if (configuration.parser === 'yml' || configuration.parser === 'yaml') {
       try {
         jsonObj = jsYaml.safeLoad(file.contents);
       } catch (e) {
-        this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invaild YML file provided&#x27;));
+        this.emit('error', new PluginError(PLUGIN_NAME, 'invaild YML file provided'));
         return callback();
       }
     } else {
-      this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, configuration.parser + &#x27; is not supported as a valid parser&#x27;));
+      this.emit('error', new PluginError(PLUGIN_NAME, configuration.parser + ' is not supported as a valid parser'));
       return callback();
     }
 
     if (!_.isPlainObject(jsonObj)) {
-      this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;configuration file contains invalid JSON&#x27;));
+      this.emit('error', new PluginError(PLUGIN_NAME, 'configuration file contains invalid JSON'));
       return callback();
     }
 
@@ -163,7 +156,7 @@
 
         // if the key does not exist, raise an error.
         if (value === undefined) {
-          this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invalid \&#x27;environment\&#x27; value&#x27;));
+          this.emit('error', new PluginError(PLUGIN_NAME, 'invalid \'environment\' value'));
           return callback();
         }
 
@@ -174,7 +167,7 @@
     }
 
     if (!_.contains(VALID_TYPES, configuration.type)) {
-      this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invalid \&#x27;type\&#x27; value&#x27;));
+      this.emit('error', new PluginError(PLUGIN_NAME, 'invalid \'type\' value'));
       return callback();
     }
 
@@ -184,12 +177,12 @@
       spaces = 0;
     } else if (configuration.pretty === true) {
       spaces = 2;
-    } else if (!isNaN(configuration.pretty) &#x26;&#x26; Number.isFinite(configuration.pretty)) {
+    } else if (!isNaN(configuration.pretty) &amp;&amp; Number.isFinite(configuration.pretty)) {
       spaces = parseInt(configuration.pretty);
     } else {
-      this.emit(&#x27;error&#x27;, new PluginError(
+      this.emit('error', new PluginError(
         PLUGIN_NAME,
-        &#x27;invalid \&#x27;pretty\&#x27; value. Should be boolean value or an integer number&#x27;
+        'invalid \'pretty\' value. Should be boolean value or an integer number'
       ));
       return callback();
     }
@@ -209,8 +202,8 @@
     });
 
     if (configuration.wrap) {
-      if (typeof configuration.wrap === &#x27;string&#x27; &#x26;&#x26;
-        (configuration.wrap.toUpperCase() === &#x27;ES6&#x27; || configuration.wrap.toUpperCase() === &#x27;ES2015&#x27;) ...</pre></li>
+      if (typeof configuration.wrap === 'string' &amp;&amp;
+        (configuration.wrap.toUpperCase() === 'ES6' || configuration.wrap.toUpperCase() === 'ES2015') ...</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
 
@@ -223,3 +216,4 @@
     ]
 </div>
 </div>
+</body></html>

@@ -61,12 +61,159 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-ng-config">module gulp-ng-config</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-ng-config.gulp-ng-config">
+            function <span class="apidocSignatureSpan"></span>gulp-ng-config
+            <span class="apidocSignatureSpan">(moduleName, configuration)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.gulp-ng-config" id="apidoc.module.gulp-ng-config">module gulp-ng-config</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-ng-config.gulp-ng-config" id="apidoc.element.gulp-ng-config.gulp-ng-config">
+        function <span class="apidocSignatureSpan"></span>gulp-ng-config
+        <span class="apidocSignatureSpan">(moduleName, configuration)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function gulpNgConfig(moduleName, configuration) {
+  var stream, defaults;
+  defaults = {
+    type: &#x27;constant&#x27;,
+    createModule: true,
+    wrap: false,
+    environment: null,
+    parser: null,
+    pretty: false,
+    templateFilePath:  __dirname + &#x27;/template.html&#x27;
+  };
+
+  if (!moduleName) {
+    throw new PluginError(PLUGIN_NAME, &#x27;Missing required moduleName option for gulp-ng-config&#x27;);
+  }
+
+  configuration = configuration || {};
+  configuration = _.merge({}, defaults, configuration);
+
+  stream = through.obj(function (file, encoding, callback) {
+    var constants = [],
+        templateFile,
+        templateOutput,
+        jsonObj,
+        wrapTemplate,
+        spaces,
+        environmentKeys;
+
+    try {
+      templateFile = fs.readFileSync(configuration.templateFilePath || defaults.templateFilePath, &#x27;utf8&#x27;);
+    } catch (error) {
+      this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invalid templateFilePath option, file not found&#x27;));
+      return callback();
+    }
+
+    if (!configuration.parser &#x26;&#x26; (_.endsWith(file.path, &#x27;yml&#x27;) || _.endsWith(file.path, &#x27;yaml&#x27;))) {
+      configuration.parser = &#x27;yml&#x27;;
+    }
+
+    if (!configuration.parser) {
+      configuration.parser = &#x27;json&#x27;;
+    }
+
+    if (configuration.parser === &#x27;json&#x27;) {
+      try {
+        jsonObj = file.isNull() ? {} : JSON.parse(file.contents.toString(&#x27;utf8&#x27;));
+      } catch (e) {
+        this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invalid JSON file provided&#x27;));
+        return callback();
+      }
+    } else if (configuration.parser === &#x27;yml&#x27; || configuration.parser === &#x27;yaml&#x27;) {
+      try {
+        jsonObj = jsYaml.safeLoad(file.contents);
+      } catch (e) {
+        this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invaild YML file provided&#x27;));
+        return callback();
+      }
+    } else {
+      this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, configuration.parser + &#x27; is not supported as a valid parser&#x27;));
+      return callback();
+    }
+
+    if (!_.isPlainObject(jsonObj)) {
+      this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;configuration file contains invalid JSON&#x27;));
+      return callback();
+    }
+
+    // select the environment in the configuration
+    if (configuration.environment) {
+      // transform values into a flat array
+      environmentKeys = [].concat(configuration.environment);
+
+      // build the output based on the specifid keys
+      jsonObj = environmentKeys.reduce(_.bind(function (obj, environmentKey) {
+        var value = _.get(jsonObj, environmentKey);
+
+        // if the key does not exist, raise an error.
+        if (value === undefined) {
+          this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invalid \&#x27;environment\&#x27; value&#x27;));
+          return callback();
+        }
+
+        // add the value to the output object
+        _.merge(obj, value);
+        return obj;
+      }, this), {});
+    }
+
+    if (!_.contains(VALID_TYPES, configuration.type)) {
+      this.emit(&#x27;error&#x27;, new PluginError(PLUGIN_NAME, &#x27;invalid \&#x27;type\&#x27; value&#x27;));
+      return callback();
+    }
+
+    jsonObj = _.merge({}, jsonObj, configuration.constants || {});
+
+    if (_.isUndefined(configuration.pretty) || configuration.pretty === false) {
+      spaces = 0;
+    } else if (configuration.pretty === true) {
+      spaces = 2;
+    } else if (!isNaN(configuration.pretty) &#x26;&#x26; Number.isFinite(configuration.pretty)) {
+      spaces = parseInt(configuration.pretty);
+    } else {
+      this.emit(&#x27;error&#x27;, new PluginError(
+        PLUGIN_NAME,
+        &#x27;invalid \&#x27;pretty\&#x27; value. Should be boolean value or an integer number&#x27;
+      ));
+      return callback();
+    }
+
+    _.each(jsonObj, function (value, key) {
+      constants.push({
+        name: key,
+        value: JSON.stringify(value, null, spaces)
+      });
+    });
+
+    templateOutput = _.template(templateFile)({
+      createModule: configuration.createModule,
+      moduleName: moduleName,
+      type: configuration.type,
+      constants: constants
+    });
+
+    if (configuration.wrap) {
+      if (typeof configuration.wrap === &#x27;string&#x27; &#x26;&#x26;
+        (configuration.wrap.toUpperCase() === &#x27;ES6&#x27; || configuration.wrap.toUpperCase() === &#x27;ES2015&#x27;) ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 

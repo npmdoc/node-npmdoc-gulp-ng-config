@@ -1,9 +1,14 @@
-# api documentation for  [gulp-ng-config (v1.4.0)](https://github.com/ajwhite/gulp-ng-config)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-ng-config.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-ng-config) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-ng-config.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-ng-config)
+# npmdoc-gulp-ng-config
+
+#### api documentation for  [gulp-ng-config (v1.4.0)](https://github.com/ajwhite/gulp-ng-config)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-ng-config.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-ng-config) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-ng-config.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-ng-config)
+
 #### AngularJS configuration generator for a module of constants
 
-[![NPM](https://nodei.co/npm/gulp-ng-config.png?downloads=true)](https://www.npmjs.com/package/gulp-ng-config)
+[![NPM](https://nodei.co/npm/gulp-ng-config.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/gulp-ng-config)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-gulp-ng-config/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-gulp-ng-config_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-gulp-ng-config/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-gulp-ng-config/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-gulp-ng-config/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-gulp-ng-config/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-gulp-ng-config/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-gulp-ng-config/build/screenCapture.npmPackageListing.svg)
 
@@ -65,13 +70,11 @@
     "main": "index.js",
     "maintainers": [
         {
-            "name": "atticoos",
-            "email": "contact@atticuswhite.com"
+            "name": "atticoos"
         }
     ],
     "name": "gulp-ng-config",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/ajwhite/gulp-ng-config.git"
@@ -82,16 +85,6 @@
     "version": "1.4.0"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module gulp-ng-config](#apidoc.module.gulp-ng-config)
-
-
-
-# <a name="apidoc.module.gulp-ng-config"></a>[module gulp-ng-config](#apidoc.module.gulp-ng-config)
 
 
 

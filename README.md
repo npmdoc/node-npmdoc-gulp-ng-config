@@ -1,6 +1,6 @@
 # npmdoc-gulp-ng-config
 
-#### api documentation for  [gulp-ng-config (v1.4.0)](https://github.com/ajwhite/gulp-ng-config)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-ng-config.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-ng-config) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-ng-config.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-ng-config)
+#### basic api documentation for  [gulp-ng-config (v1.4.0)](https://github.com/ajwhite/gulp-ng-config)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-ng-config.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-ng-config) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-ng-config.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-ng-config)
 
 #### AngularJS configuration generator for a module of constants
 
@@ -82,7 +82,8 @@
     "scripts": {
         "test": "gulp test"
     },
-    "version": "1.4.0"
+    "version": "1.4.0",
+    "bin": {}
 }
 ```
 
